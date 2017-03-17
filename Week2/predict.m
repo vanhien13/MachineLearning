@@ -23,7 +23,14 @@ p(idx_1) = ones(size(idx_1));
 p(idx_0) = zeros(size(idx_0));
 
 
-
+h = sigmoid(X*theta);
+for i=1:m,
+    if h(i) >= 0.5,
+        p(i) = 1;
+    elseif h(i) < 0.5,
+        p(i) = 0;
+    end
+end
 
 
 
