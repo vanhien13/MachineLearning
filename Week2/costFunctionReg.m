@@ -29,6 +29,14 @@ G(1) = 0; % extra term for gradient
 % Gradient
 grad = ((1/m) .* X' * (sig_theta - y)) + G;
 
+%[J, grad] = costFunction(theta, X, y);
+
+% this effectively ignores "theta zero" in the following calculations
+%theta_zeroed_first = [0; theta(2:length(theta));];
+
+%J = J + lambda / (2 * m) * sum( theta_zeroed_first .^ 2 );
+%grad = grad .+ (lambda / m) * theta_zeroed_first;
+
 % =============================================================
 
 end
