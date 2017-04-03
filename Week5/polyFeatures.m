@@ -1,28 +1,36 @@
-function plotFit(min_x, max_x, mu, sigma, theta, p)
-%PLOTFIT Plots a learned polynomial regression fit over an existing figure.
-%Also works with linear regression.
-%   PLOTFIT(min_x, max_x, mu, sigma, theta, p) plots the learned polynomial
-%   fit with power p and feature normalization (mu, sigma).
+function [X_poly] = polyFeatures(X, p)
+%POLYFEATURES Maps X (1D vector) into the p-th power
+%   [X_poly] = POLYFEATURES(X, p) takes a data matrix X (size m x 1) and
+%   maps each example into its polynomial features where
+%   X_poly(i, :) = [X(i) X(i).^2 X(i).^3 ...  X(i).^p];
+%
 
-% Hold on to the current figure
-hold on;
 
-% We plot a range slightly bigger than the min and max values to get
-% an idea of how the fit will vary outside the range of the data points
-x = (min_x - 15: 0.05 : max_x + 25)';
+% You need to return the following variables correctly.
+X_poly = zeros(numel(X), p);
 
-% Map the X values 
-X_poly = polyFeatures(x, p);
-X_poly = bsxfun(@minus, X_poly, mu);
-X_poly = bsxfun(@rdivide, X_poly, sigma);
+% ====================== YOUR CODE HERE ======================
+% Instructions: Given a vector X, return a matrix X_poly where the p-th 
+%               column of X contains the values of X to the p-th power.
+%
+% 
+m = size(X, 1);
 
-% Add ones
-X_poly = [ones(size(x, 1), 1) X_poly];
+for i=1:m
 
-% Plot
-plot(x, X_poly * theta, '--', 'LineWidth', 2)
+    ploy_feat = zeros(p, 1);
 
-% Hold off to the current figure
-hold off
+    for j=1:p
+        ploy_feat(j) =  X(i).^j;
+    end
+
+    X_poly(i, :) = ploy_feat;
+end
+
+
+
+
+
+% =========================================================================
 
 end
